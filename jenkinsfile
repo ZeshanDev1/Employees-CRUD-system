@@ -1,40 +1,17 @@
-pipeline {
-    agent any
-
-    environment {
-        // Your GitHub repo URL
-        REPO_URL = 'https://github.com/ZeshanDev1/Employees-CRUD-system.git'
-        BRANCH = 'main'
-        COMPOSE_FILE = 'docker-compose.yml'
-        PROJECT_NAME = 'employee-app-jenkins'  // unique project name for docker-compose
-    }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: "${BRANCH}", url: "${REPO_URL}"
-            }
-        }
-
-        stage('Build and Deploy') {
-            steps {
-                script {
-                    // Pull latest code and build containers
-                    sh """
-                        docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_FILE} down
-                        docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_FILE} up -d --build
-                    """
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and deployment succeeded!'
-        }
-        failure {
-            echo 'Build or deployment failed!'
+stage('Build and Deploy') {
+    steps {
+        script {
+            sh """
+                # Try to stop and remove any container named server_jenkins or client_jenkins forcibly
+                docker rm -f server_jenkins || true
+                docker rm -f client_jenkins || true
+                
+                # Bring down any existing docker-compose resources (network, volumes)
+                docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_FILE} down
+                
+                # Build and start containers in detached mode
+                docker-compose -p ${PROJECT_NAME} -f ${COMPOSE_FILE} up -d --build
+            """
         }
     }
 }
