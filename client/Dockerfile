@@ -1,0 +1,15 @@
+# client/Dockerfile
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+# React runs on port 3000 by default
+EXPOSE 3000
+
+CMD ["npm", "start"]
