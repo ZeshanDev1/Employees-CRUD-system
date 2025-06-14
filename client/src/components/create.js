@@ -19,7 +19,7 @@ export default function Create() {
         e.preventDefault()
 
         const newPerson = { ...form }
-         const response = await fetch(`http://13.218.131.137:5000/record/add`, {
+         const response = await fetch(`http://54.87.76.62:5000/record/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
