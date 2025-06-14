@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const API_BASE_URL = "http://3.95.178.211:5000"; // Replace with process.env.REACT_APP_YOUR_HOSTNAME if using .env
+const API_BASE_URL = "http://13.218.131.137:5000"; // Replace with process.env.REACT_APP_YOUR_HOSTNAME if using .env
 
 const Record = (props) => {
   return (

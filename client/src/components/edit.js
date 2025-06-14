@@ -16,7 +16,7 @@ export default function Edit() {
       const id = params.id;
 
       try {
-        const response = await fetch(`http://3.95.178.211:5000/record/${id}`);
+        const response = await fetch(`http://13.218.131.137:5000/record/${id}`);
 
         if (!response.ok) {
           const message = `An error occurred: ${response.statusText}`;
@@ -50,7 +50,7 @@ export default function Edit() {
 
     const editedPerson = { ...form };
 
-    const response = await fetch(`http://3.95.178.211:5000/record/update/${params.id}`, {
+    const response = await fetch(`http://13.218.131.137:5000/record/update/${params.id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
